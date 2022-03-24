@@ -4,79 +4,106 @@ const EVENTS = [
     { id: 1, start: 90, end: 130 }, // an event from 10:30am to 11.40am
     { id: 2, start: 105, end: 135 }, // an event from 10:45am to 11:45am
     { id: 3, start: 120, end: 240 }, // an event from 11:00am to 1:00pm
-    { id: 4, start: 150, end: 200 }, // an event from 12:00pm to 1:20pm
-    { id: 4, start: 150, end: 270 }, // an event from 12:00pm to 1:20pm
-    // { id: 5, start: 500, end: 560 },// an event from 5:20pm to 6:20pm
+    { id: 4, start: 180, end: 260 }, // an event from 12:00pm to 1:20pm
+    { id: 5, start: 500, end: 560 },// an event from 5:20pm to 6:20pm
 ];
 
-const CONTAINERWIDTH = 500;
+const CONTAINERWIDTH = 600;
+
+var elements = creatEvent(EVENTS);
+renderHours();
+renderEvents(elements);
 
 function creatEvent(arrEvents) {
 
     arrEvents.sort((a, b) => a.start - b.start);
-    arrEvents[0].left = 0;
-    arrEvents[0].width = CONTAINERWIDTH;
 
-    let collidesWith = [];
+    arrEvents.forEach((event, eventIdx) => {
 
-    for (var i = 1; i < arrEvents.length; i++) {
+        if (eventIdx === 0) {
+            event.left = 0;
+            event.width = CONTAINERWIDTH;
 
-        for (var j = 0; j < i; j++) {
+        } else {
 
-            if (arrEvents[i].start < arrEvents[j].end && arrEvents[i].start >= arrEvents[j].start) {
+            let collidesWith = [];
 
-                collidesWith.push(j);
+            for (let i = 0; i < eventIdx; i++) {
 
-            }
-            
-            if (collidesWith.length !== 0 && collidesWith.length !== 1) {
-                var width = parseInt(CONTAINERWIDTH / (collidesWith.length + 1));
-                console.log('width', width);
+                if (event.start < arrEvents[i].end && event.start > arrEvents[i].start) {
 
-                for (var x = 0; x <= collidesWith.length; x++) {
+                    collidesWith.unshift(i);
 
-                    arrEvents[i - x].width = width;
-                    if(x!==0){
+                } else {
 
-                        arrEvents[i - (collidesWith.length - x)].left = x * width;
+                    if (event.start === arrEvents[i].start) {
+                        event.width = arrEvents[i].width = parseInt(arrEvents[i].width / 2);
+                        event.left = arrEvents[i].left + arrEvents[i].width;
+                        return;
                     }
+
+                    event.left = (event.left) ? event.left : arrEvents[i].left;
+                    event.width = (event.width) ? event.width + arrEvents[i].width : arrEvents[i].width;
                 }
 
-            } else if (collidesWith.length === 1 && j === i - 1) {
-                arrEvents[i].left = (arrEvents[collidesWith[0]].left !== 0) ? 0 : arrEvents[collidesWith[0]].width;
-                arrEvents[i].width = (CONTAINERWIDTH - arrEvents[j].width);
-            } else if (collidesWith.length === 0) {
-                arrEvents[i].left = 0;
-                arrEvents[i].width = CONTAINERWIDTH;
-
             }
+
+            if (collidesWith.length > 1) {
+
+                let width = parseInt(CONTAINERWIDTH / (collidesWith.length + 1));
+
+                for (let x = 0; x <= collidesWith.length; x++) {
+
+                    event.width = width;
+
+                    arrEvents[eventIdx - x].width = width;
+                    arrEvents[eventIdx - (collidesWith.length - x)].left = x * width;
+
+                }
+
+            } else if (collidesWith.length === 1) {
+
+                event.left = (arrEvents[collidesWith[0]].left !== 0) ? 0 : arrEvents[collidesWith[0]].width;
+                event.width = (arrEvents[collidesWith[0]].left === 0) ? parseInt(arrEvents[0].width / 2) : CONTAINERWIDTH - arrEvents[0].width;
+
+            } else {
+                event.left = 0;
+                event.width = CONTAINERWIDTH;
+            }
+
         }
-        console.log('collidesWith', collidesWith);
-        collidesWith = [];
 
-        console.log(`arrEvents:`, arrEvents);
-    }
-
+    })
 
     return arrEvents;
-
 }
 
-var elements = creatEvent(EVENTS);
-renderEvents(elements);
+function renderHours() {
 
+    var strHtml = '';
 
+    for (let i = 9; i <= 21; i++) {
 
-/////////////////////////////////////////////////////////
+        strHtml += `<p style="font-size:15px;">${i}:00</p>`;
+        if (i === 21) break;
+        strHtml += `<p style="font-size:10px">${i}:30</p>`;
+
+    }
+
+    var elContainer = document.querySelector('.hours');
+    elContainer.innerHTML = strHtml;
+}
+
 function renderEvents(elementsToRender) {
 
     var strHtml = '';
+
     elementsToRender.forEach(obj => {
         strHtml += `<div class="event" style="top:${obj.start}px;
         height:${obj.end - obj.start}px;
-        width:${obj.width - 10}px;
-        left:${obj.left + 10}px;
-        "></div>`;
+        width:${obj.width - 3}px;
+        left:${obj.left}px;
+        ">New event<span>Location</span></div>`;
     })
 
     var elContainer = document.querySelector('.container');
@@ -84,4 +111,7 @@ function renderEvents(elementsToRender) {
 
 }
 
-//////////////////////////////////////////////////////////
+
+
+
+
