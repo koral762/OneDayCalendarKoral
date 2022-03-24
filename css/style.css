@@ -37,13 +37,18 @@ body{
 
 .hours p{
     margin: 0;  
+    justify-content: end;
+    align-items: center;
     
+    display: flex;
     color:rgb(85, 73, 73);
 }
 
 
 span{
     color:rgb(85, 73, 73);
+    margin-left:0.5em;
+    justify-self: end;
     font-size: x-small;
 }
 

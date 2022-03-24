@@ -43,25 +43,25 @@ function creatEvent(arrEvents) {
 
             }
 
-            if (collidesWith.length !== 0 && collidesWith.length !== 1) {
+            if (collidesWith.length > 1) {
 
                 let width = parseInt(CONTAINERWIDTH / (collidesWith.length + 1));
-                
+
                 for (let x = 0; x <= collidesWith.length; x++) {
-                    
+
                     event.width = width;
-                    
+
                     arrEvents[eventIdx - x].width = width;
                     arrEvents[eventIdx - (collidesWith.length - x)].left = x * width;
-                    
+
                 }
             } else if (collidesWith.length === 1) {
-                                
-                
-                arrEvents[collidesWith[0]].width=parseInt(arrEvents[collidesWith[0]].width/2);
+
+
+                arrEvents[collidesWith[0]].width = parseInt(arrEvents[collidesWith[0]].width / 2);
                 event.width = arrEvents[0].width
                 event.left = (arrEvents[collidesWith[0]].left !== 0) ? 0 : arrEvents[collidesWith[0]].width;
-                
+
             } else {
                 event.left = 0;
                 event.width = CONTAINERWIDTH;
@@ -85,8 +85,8 @@ function renderEvents(elementsToRender) {
     elementsToRender.forEach(obj => {
         strHtml += `<div class="event" style="top:${obj.start}px;
         height:${obj.end - obj.start}px;
-        width:${obj.width -3}px;
-        left:${obj.left }px;
+        width:${obj.width - 3}px;
+        left:${obj.left}px;
         ">New event<span>Location</span></div>`;
     })
 
@@ -98,17 +98,19 @@ function renderEvents(elementsToRender) {
 function renderHours() {
 
     var strHtml = '';
+    var ampm = '';
 
     for (let i = 9; i <= 21; i++) {
 
+        ampm = (i < 12) ? 'AM' : 'PM';
 
-        strHtml += `<p style="font-size:15px;">${i}:00</p>`;
-        if(i === 21) break;
-        strHtml += `<p style="font-size:10px">${i}:30</p>`;
+        strHtml += `<p style="font-size:15px;">${i}:00<span>${ampm}</span></p>`;
+        if (i === 21) break;
+        strHtml += `<p style="font-size:10px">${i}:30 </p>`;
 
     }
 
-    
+
 
     var elContainer = document.querySelector('.hours');
     elContainer.innerHTML = strHtml;

@@ -8,7 +8,7 @@ const EVENTS = [
     { id: 5, start: 500, end: 560 },// an event from 5:20pm to 6:20pm
 ];
 
-const CONTAINERWIDTH = 500;
+const CONTAINERWIDTH = 600;
 
 function creatEvent(arrEvents) {
 
