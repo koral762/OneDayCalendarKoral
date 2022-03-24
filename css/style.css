@@ -1,0 +1,37 @@
+body{
+    align-items: center;
+    display: flex;
+    padding: 1em;
+}
+
+.container{
+    position: relative;
+    box-shadow: 0px;
+    height: 720px;
+    width: 600px;
+    background-color: rgb(219, 234, 248);
+    /* display:inline-block; */
+}
+
+.event{
+    position:absolute;
+    background-color: rgb(255, 255, 255);
+    border-left: 8px rgb(147, 125, 230) solid;
+}
+
+.hours{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    color:rgb(20, 19, 19);
+    margin: 0;    
+    height: 720px;
+}
+
+.hours p{
+    margin: 0;  
+}
+
+
+
+
