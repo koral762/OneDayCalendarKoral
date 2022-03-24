@@ -26,6 +26,13 @@ body{
     border-left: 4px rgb(49, 49, 146) solid;
 }
 
+span.event {
+}
+
+span.hours{
+
+}
+
 .hours{
     display: flex;
     flex-direction: column;
@@ -37,18 +44,16 @@ body{
 
 .hours p{
     margin: 0;  
+    display: flex;
     justify-content: end;
     align-items: center;
-    
-    display: flex;
+    margin-right: 0.3rem;
     color:rgb(85, 73, 73);
 }
 
 
 span{
     color:rgb(85, 73, 73);
-    margin-left:0.5em;
-    justify-self: end;
     font-size: x-small;
 }
 

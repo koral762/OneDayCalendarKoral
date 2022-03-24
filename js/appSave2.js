@@ -104,7 +104,7 @@ function renderHours() {
 
         ampm = (i < 12) ? 'AM' : 'PM';
 
-        strHtml += `<p style="font-size:15px;">${i}:00<span>${ampm}</span></p>`;
+        strHtml += `<p style="font-size:15px;">${i}:00<span style="margin-left:0.3rem">${ampm}</span></p>`;
         if (i === 21) break;
         strHtml += `<p style="font-size:10px">${i}:30 </p>`;
 
