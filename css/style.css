@@ -10,7 +10,6 @@ body{
     height: 720px;
     width: 600px;
     background-color: rgb(226, 230, 235);
-    /* display:inline-block; */
 }
 
 .event{
@@ -50,7 +49,6 @@ span.hours{
     margin-right: 0.3rem;
     color:rgb(85, 73, 73);
 }
-
 
 span{
     color:rgb(85, 73, 73);
