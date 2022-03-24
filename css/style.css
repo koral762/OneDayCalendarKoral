@@ -45,6 +45,8 @@ body{
 
 span{
     color:rgb(85, 73, 73);
+    margin-left:0.5em;
+    justify-self: end;
     font-size: x-small;
 }
 

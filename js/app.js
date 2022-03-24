@@ -81,10 +81,12 @@ function creatEvent(arrEvents) {
 function renderHours() {
 
     var strHtml = '';
-
+    var ampm = '';
     for (let i = 9; i <= 21; i++) {
 
-        strHtml += `<p style="font-size:15px;">${i}:00</p>`;
+        ampm = (i < 12) ? 'AM' : 'PM';
+
+        strHtml += `<p style="font-size:15px;">${i}:00<span style="margin-left:0.3rem">${ampm}</span></p>`;
         if (i === 21) break;
         strHtml += `<p style="font-size:10px">${i}:30</p>`;
 
