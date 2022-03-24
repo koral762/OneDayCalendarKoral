@@ -5,10 +5,7 @@ const EVENTS = [
     { id: 2, start: 105, end: 135 }, // an event from 10:45am to 11:45am
     { id: 3, start: 120, end: 240 }, // an event from 11:00am to 1:00pm
     { id: 4, start: 180, end: 260 }, // an event from 12:00pm to 1:20pm
-    { id: 4, start: 180, end: 280 }, // an event from 12:00pm to 1:20pm
     { id: 5, start: 500, end: 560 },// an event from 5:20pm to 6:20pm
-    { id: 5, start: 400, end: 500 },// an event from 5:20pm to 6:20pm
-    { id: 4, start: 180, end: 250 }, // an event from 12:00pm to 1:20pm
 ];
 
 const CONTAINERWIDTH = 500;
@@ -84,9 +81,9 @@ function renderEvents(elementsToRender) {
     elementsToRender.forEach(obj => {
         strHtml += `<div class="event" style="top:${obj.start}px;
         height:${obj.end - obj.start}px;
-        width:${obj.width - 10}px;
-        left:${obj.left + 10}px;
-        "></div>`;
+        width:${obj.width -3}px;
+        left:${obj.left }px;
+        ">New event<span>Location</span></div>`;
     })
 
     var elContainer = document.querySelector('.container');
